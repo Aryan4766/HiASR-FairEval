@@ -1,0 +1,11 @@
+{
+  "total_unique_words": 175616,
+  "correct_count": 174720,
+  "incorrect_count": 896,
+  "error_rate_percent": 0.51,
+  "script_distribution": {
+    "devanagari": 287,
+    "latin": 412,
+    "mixed": 197
+  }
+}

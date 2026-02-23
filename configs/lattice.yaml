@@ -1,0 +1,25 @@
+# ==============================================================================
+# Lattice-Based WER Configuration
+# ==============================================================================
+
+alignment:
+  unit: "word"                    # Alignment unit: word / subword / phrase
+  substitution_cost: 1.0
+  insertion_cost: 1.0
+  deletion_cost: 1.0
+
+consensus:
+  num_models: 5
+  min_agreement: 3               # Minimum models that must agree to override reference
+  trust_threshold: 0.6           # Fraction of models that must agree (min_agreement / num_models)
+
+evaluation:
+  compute_original_wer: true
+  compute_adjusted_wer: true
+  validate_wer_decrease: true    # Ensure adjusted WER <= original WER
+
+paths:
+  output_dir: "outputs/q4"
+  comparison_table: "outputs/q4/wer_comparison.csv"
+
+seed: 42

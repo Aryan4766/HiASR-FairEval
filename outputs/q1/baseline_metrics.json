@@ -1,0 +1,7 @@
+{
+  "label": "Whisper Small Pretrained",
+  "corpus_wer": 0.6956,
+  "corpus_cer": 0.3645,
+  "num_samples": 200,
+  "timestamp": "2026-02-23T10:27:03.557799"
+}

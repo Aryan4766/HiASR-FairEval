@@ -1,0 +1,14 @@
+torch
+transformers
+datasets
+evaluate
+librosa
+pydub
+pandas
+numpy
+jiwer
+matplotlib
+tqdm
+pyyaml
+soundfile
+requests

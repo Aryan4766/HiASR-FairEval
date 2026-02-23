@@ -1,0 +1,7 @@
+model,original_wer,adjusted_wer,delta,valid
+Model H,0.0398,0.0309,-0.0089,True
+Model i,0.073,0.0836,0.0106,False
+Model k,0.2443,0.2409,-0.0034,True
+Model l,0.1132,0.102,-0.0112,True
+Model m,0.2073,0.1876,-0.0197,True
+Model n,0.1139,0.0962,-0.0177,True

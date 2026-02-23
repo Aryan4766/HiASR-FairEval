@@ -1,0 +1,4 @@
+"Values are raw WER ratios (e.g., 0.30 = 30%)",Unnamed: 1
+Model,Hindi
+Whisper Small (Pretrained),0.83
+FT Whisper Small (yours),1.49

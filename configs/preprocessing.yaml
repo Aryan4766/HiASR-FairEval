@@ -1,0 +1,35 @@
+# ==============================================================================
+# Preprocessing Configuration
+# ==============================================================================
+
+audio:
+  sample_rate: 16000
+  mono: true
+  format: "wav"
+  max_duration_sec: 30.0       # Clip max length for training
+  min_duration_sec: 1.0        # Skip very short clips
+
+text:
+  unicode_normalization: "NFKC"
+  remove_punctuation: true
+  lowercase: false             # Hindi doesn't have case
+  normalize_whitespace: true
+
+dataset:
+  # URL template for Josh Talks data
+  base_url: "https://storage.googleapis.com/upload_goai"
+  recording_suffix: "_recording.wav"
+  transcription_suffix: "_transcription.json"
+  metadata_suffix: "_metadata.json"
+
+  # Subset selection
+  subset_max_hours: 3.0        # Max hours for training subset
+  subset_max_samples: 500      # Max samples for training subset
+  eval_samples: 200            # Samples for baseline evaluation (FLEURS)
+
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  subsets: "data/subsets"
+
+seed: 42

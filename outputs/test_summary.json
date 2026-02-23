@@ -1,0 +1,78 @@
+{
+  "Q1": {
+    "status": "PASSED",
+    "result": {
+      "recordings": 104,
+      "total_hours": 21.89
+    }
+  },
+  "Q3": {
+    "status": "PASSED",
+    "result": {
+      "correct": "174720",
+      "incorrect": "896",
+      "total": 175616
+    }
+  },
+  "Q2": {
+    "status": "PASSED",
+    "result": {
+      "total_detections": 236
+    }
+  },
+  "Q4": {
+    "status": "PASSED",
+    "result": {
+      "results": [
+        {
+          "model": "Model H",
+          "original_wer": 0.0398,
+          "adjusted_wer": 0.0309,
+          "delta": -0.0089,
+          "valid": true
+        },
+        {
+          "model": "Model i",
+          "original_wer": 0.073,
+          "adjusted_wer": 0.0836,
+          "delta": 0.0106,
+          "valid": false
+        },
+        {
+          "model": "Model k",
+          "original_wer": 0.2443,
+          "adjusted_wer": 0.2409,
+          "delta": -0.0034,
+          "valid": true
+        },
+        {
+          "model": "Model l",
+          "original_wer": 0.1132,
+          "adjusted_wer": 0.102,
+          "delta": -0.0112,
+          "valid": true
+        },
+        {
+          "model": "Model m",
+          "original_wer": 0.2073,
+          "adjusted_wer": 0.1876,
+          "delta": -0.0197,
+          "valid": true
+        },
+        {
+          "model": "Model n",
+          "original_wer": 0.1139,
+          "adjusted_wer": 0.0962,
+          "delta": -0.0177,
+          "valid": true
+        }
+      ],
+      "consensus_summary": {
+        "total_positions": 818,
+        "overridden": 15,
+        "override_rate": 1.83
+      },
+      "num_segments": 46
+    }
+  }
+}

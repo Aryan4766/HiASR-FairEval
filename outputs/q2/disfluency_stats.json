@@ -1,0 +1,17 @@
+{
+  "total_disfluencies": 236,
+  "unique_recordings": 214,
+  "unique_speakers": 1,
+  "per_type": {
+    "repetition": 85,
+    "filler": 63,
+    "false_start": 38,
+    "self_correction": 31,
+    "prolongation": 9,
+    "elongation": 8,
+    "hesitation": 2
+  },
+  "per_speaker_count": {
+    "dataset": 236
+  }
+}
