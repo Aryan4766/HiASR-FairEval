@@ -1,5 +1,9 @@
 # HiASR-FairEval — Hindi ASR Research & Fair Evaluation
 
+![Tests](https://github.com/Aryan4766/HiASR-FairEval/actions/workflows/test.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.9%20|%203.10%20|%203.11-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 A research-grade ASR pipeline implementing Whisper fine-tuning, disfluency detection,
 spelling error classification, and lattice-based fair WER evaluation for Hindi speech data.
 
@@ -17,41 +21,61 @@ spelling error classification, and lattice-based fair WER evaluation for Hindi s
 ```
 HiASR-FairEval/
 ├── README.md
-├── requirements.txt
+├── LICENSE
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── CHANGELOG.md
+├── requirements.txt              # Pinned production dependencies
+├── requirements-dev.txt           # Dev/test dependencies
 ├── .gitignore
-├── test_all.py                 # End-to-end pipeline test
-├── configs/                    # YAML configuration files
+├── test_all.py                    # End-to-end pipeline test
+├── .github/
+│   └── workflows/
+│       └── test.yml               # CI/CD pipeline
+├── configs/                       # YAML configuration files
 │   ├── preprocessing.yaml
 │   ├── training.yaml
 │   └── lattice.yaml
 ├── src/
-│   ├── data_pipeline/          # Data download & preprocessing
+│   ├── data_pipeline/             # Data download & preprocessing
 │   │   ├── fix_urls.py
 │   │   ├── download_subset.py
 │   │   ├── audio_preprocessing.py
 │   │   └── text_normalization.py
-│   ├── q1_whisper/             # Whisper fine-tuning & evaluation
+│   ├── q1_whisper/                # Whisper fine-tuning & evaluation
 │   │   ├── baseline_eval_colab.ipynb
 │   │   ├── finetune_subset_colab.ipynb
 │   │   ├── compute_wer.py
 │   │   └── error_analysis.py
-│   ├── q2_disfluency/          # Disfluency detection
+│   ├── q2_disfluency/             # Disfluency detection
 │   │   ├── detect_rules.py
 │   │   ├── segment_audio.py
 │   │   └── stats_analysis.py
-│   ├── q3_spelling/            # Spelling classification
+│   ├── q3_spelling/               # Spelling classification
 │   │   ├── extract_unique_words.py
 │   │   ├── spell_classifier.py
 │   │   └── error_pattern_analysis.py
-│   ├── q4_lattice/             # Lattice-based WER
+│   ├── q4_lattice/                # Lattice-based WER
 │   │   ├── align_dp.py
 │   │   ├── majority_consensus.py
 │   │   └── lattice_wer.py
-│   └── utils/                  # Shared utilities
+│   └── utils/                     # Shared utilities
 │       ├── logger.py
 │       ├── config_loader.py
 │       └── metrics.py
-└── outputs/                    # Generated outputs
+├── notebooks/                     # Jupyter notebooks (exploration)
+│   ├── README.md
+│   ├── 01_whisper_baseline_eval.ipynb
+│   └── 02_whisper_finetune.ipynb
+├── tests/                         # Unit tests
+│   ├── conftest.py
+│   ├── test_q1_whisper.py
+│   ├── test_q2_disfluency.py
+│   ├── test_q3_spelling.py
+│   ├── test_q4_lattice.py
+│   ├── test_data_pipeline.py
+│   └── test_utils.py
+└── outputs/                       # Generated outputs
     ├── q1/
     ├── q2/
     ├── q3/
@@ -61,15 +85,41 @@ HiASR-FairEval/
 ## Setup
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.9+ (tested on 3.9, 3.10, 3.11)
 - 8GB RAM (local)
 - Google Colab with T4 GPU (for Whisper training)
 
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Aryan4766/HiASR-FairEval.git
+cd HiASR-FairEval
+
+# Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# Install dependencies
 pip install -r requirements.txt
+
+# For development (includes test/lint tools)
+pip install -r requirements-dev.txt
 ```
+
+### Data Setup
+
+The dataset files are **not** tracked in git (they are in `.gitignore`). Place the following files in the project root:
+
+| File | Size | Description |
+|------|------|-------------|
+| `FT Data.xlsx` | ~15 KB | Fine-tuning corpus index |
+| `FT Result.xlsx` | ~52 KB | Fine-tuning result template |
+| `Unique Words Data.xlsx` | ~2.4 MB | Hindi word list (~1,77,000 words) |
+| `Speech Disfluencies List.xlsx` | ~22 KB | Disfluency examples by type |
+| `Speech Disfluencies Result.xlsx` | ~51 KB | Disfluency results |
+| `Question 4.xlsx` | ~14 KB | Multi-model ASR transcriptions |
 
 ### Hardware Design
 
@@ -93,9 +143,9 @@ python -m src.data_pipeline.audio_preprocessing
 
 ### 2. Q1 — Whisper Fine-Tuning
 
-1. Open `src/q1_whisper/baseline_eval_colab.ipynb` in Google Colab
+1. Open `notebooks/01_whisper_baseline_eval.ipynb` in Google Colab
 2. Run all cells for baseline WER on FLEURS Hindi
-3. Open `src/q1_whisper/finetune_subset_colab.ipynb` in Colab
+3. Open `notebooks/02_whisper_finetune.ipynb` in Colab
 4. Upload processed subset and run fine-tuning
 5. Run error analysis locally:
 
@@ -136,6 +186,19 @@ python -m src.q4_lattice.lattice_wer --data data/raw/model_transcriptions.json
 python -m src.q4_lattice.lattice_wer
 ```
 
+### Running Tests
+
+```bash
+# Run all unit tests
+pytest tests/ -v
+
+# Run with coverage report
+pytest tests/ -v --cov=src --cov-report=term-missing
+
+# Run integration test (requires data files)
+python test_all.py
+```
+
 ## Key Outputs
 
 | Output | Path |
@@ -157,14 +220,27 @@ All parameters are config-driven via YAML files in `configs/`:
 
 ## Engineering Practices
 
-- No hardcoded paths — config-driven
+- No hardcoded paths — config-driven via YAML
 - Type hints and docstrings throughout
 - Memory-efficient (streaming, per-file processing)
 - GPU-optional design (CPU fallback everywhere)
 - Structured logging with hardware info
-- Comprehensive test suite (`test_all.py`)
-- Reproducible (seed-controlled randomization)
+- Comprehensive test suite (`test_all.py` + `tests/`)
+- CI/CD pipeline with lint, format, and test checks
+- Reproducible (seed-controlled randomization, pinned dependencies)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.
 
 ## License
 
-This project is part of the JoshTalks AI Researcher Intern assessment.
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+
+## Acknowledgments
+
+This project is part of the JoshTalks AI Researcher Intern assessment. Built using:
+
+- [OpenAI Whisper](https://github.com/openai/whisper) for ASR
+- [Google FLEURS](https://huggingface.co/datasets/google/fleurs) for evaluation
+- [jiwer](https://github.com/jitsi/jiwer) for WER computation

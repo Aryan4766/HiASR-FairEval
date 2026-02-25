@@ -1,14 +1,19 @@
-torch
-transformers
-datasets
-evaluate
-librosa
-pydub
-pandas
-numpy
-jiwer
-matplotlib
-tqdm
-pyyaml
-soundfile
-requests
+# requirements.txt — HiASR-FairEval
+# Python: 3.9 / 3.10 / 3.11
+# Generated: 2026-02-25
+
+torch==2.1.2
+transformers==4.35.0
+datasets==2.14.0
+evaluate==0.4.0
+librosa==0.10.1
+pydub==0.25.1
+pandas==2.1.1
+numpy==1.24.3
+jiwer==3.0.3
+matplotlib==3.8.0
+tqdm==4.66.1
+pyyaml==6.0.1
+soundfile==0.12.1
+requests==2.31.0
+openpyxl==3.1.2

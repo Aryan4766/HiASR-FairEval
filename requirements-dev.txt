@@ -1,0 +1,8 @@
+# Development dependencies for HiASR-FairEval
+-r requirements.txt
+
+pytest==7.4.3
+pytest-cov==4.1.0
+flake8==6.1.0
+black==23.10.1
+mypy==1.7.0
